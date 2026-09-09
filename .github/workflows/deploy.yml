@@ -15,34 +15,40 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Checkout the repository
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # Set up Flutter
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          channel: 'stable'
+          channel: stable
 
+      # Install Flutter dependencies
       - name: Install dependencies
         run: flutter pub get
 
+      # Build Flutter Web
       - name: Build Flutter Web
-        run: flutter build web --release --base-href /https://github.com/chiruhas-siddanti/Portfolio_Flutter_24XV1M0511.git/
+        run: flutter build web --release --base-href /Portfolio_Flutter_24XV1M0511/
 
+      # Upload the build to GitHub Pages
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: build/web
 
   deploy:
+    runs-on: ubuntu-latest
+    needs: build
+
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
 
-    runs-on: ubuntu-latest
-    needs: build
-
     steps:
+      # Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
