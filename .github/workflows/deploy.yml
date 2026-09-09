@@ -27,7 +27,7 @@ jobs:
         run: flutter pub get
 
       - name: Build Flutter Web
-        run: flutter build web --release --base-href https://github.com/chiruhas-siddanti/Portfolio_Flutter_24XV1M0511.git
+        run: flutter build web --release --base-href /https://github.com/chiruhas-siddanti/Portfolio_Flutter_24XV1M0511.git/
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
